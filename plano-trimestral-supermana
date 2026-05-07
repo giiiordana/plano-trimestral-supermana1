@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Campanhas Trimestral — Super Maná</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Lora:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #3F5927;
+  --verde-m: #6C8654;
+  --verde-c: #98B280;
+  --verde-menta: #C8DDB8;
+  --ambar: #E07B1A;
+  --ambar-c: #F4A543;
+  --dourado: #D4920A;
+  --preto: #1A1A18;
+  --cinza-e: #3D3D3A;
+  --cinza-m: #8A8A84;
+  --cinza-c: #F0EEE8;
+  --branco: #FAFAF7;
+  --noite: #1E2E14;
+  --neon: #5DC05B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--cinza-c);color:var(--cinza-e);min-height:100vh}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,var(--preto) 0%,var(--verde) 55%,var(--verde-m) 100%);padding:36px 32px 28px;position:sticky;top:0;z-index:200;box-shadow:0 4px 24px rgba(26,26,24,.35)}
+.header-inner{max-width:1100px;margin:0 auto}
+.header-label{color:var(--ambar);font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px}
+.header-title{color:var(--branco);font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1}
+.header-slogan{color:var(--verde-menta);font-family:'Lora',serif;font-style:italic;font-size:13px;margin-top:6px}
+
+/* MONTH TABS */
+.month-tabs{display:flex;gap:8px;margin-top:20px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.month-tabs::-webkit-scrollbar{display:none}
+.month-tab{flex-shrink:0;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 18px;color:var(--verde-menta);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;transition:all .2s}
+.month-tab.active,.month-tab:hover{background:var(--ambar);color:var(--preto);border-color:var(--ambar);box-shadow:0 4px 16px rgba(224,123,26,.35)}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:32px 20px 80px}
+
+/* MONTH SECTION */
+.month-section{display:none}
+.month-section.active{display:block}
+.month-header-bar{display:flex;align-items:center;gap:14px;margin-bottom:28px;padding:16px 20px;border-radius:12px;background:linear-gradient(90deg,var(--verde),var(--verde-m))}
+.month-header-bar .mh-icon{font-size:28px}
+.month-header-bar .mh-title{font-size:20px;font-weight:900;color:var(--branco);letter-spacing:-.01em}
+.month-header-bar .mh-sub{font-size:12px;color:var(--verde-menta);font-family:'Lora',serif;font-style:italic;margin-top:2px}
+
+/* DATE BUTTONS GRID */
+.dates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:32px}
+.date-btn{background:var(--branco);border:1.5px solid var(--verde-menta);border-radius:12px;padding:16px 18px;cursor:pointer;text-align:left;transition:all .22s;position:relative;overflow:hidden}
+.date-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--verde);border-radius:4px 0 0 4px;transition:width .2s}
+.date-btn:hover{border-color:var(--ambar);box-shadow:0 4px 20px rgba(63,89,39,.18);transform:translateY(-2px)}
+.date-btn:hover::before{width:6px;background:var(--ambar)}
+.date-btn.active-date{border-color:var(--ambar);background:linear-gradient(135deg,#fffaf4,#fff8ee);box-shadow:0 4px 20px rgba(224,123,26,.22)}
+.date-btn.active-date::before{width:6px;background:var(--ambar)}
+.date-btn .db-date{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ambar);margin-bottom:4px}
+.date-btn .db-name{font-size:13px;font-weight:700;color:var(--preto);line-height:1.35;margin-bottom:8px}
+.date-btn .db-idea{font-size:11px;color:var(--cinza-m);line-height:1.5;font-style:italic;font-family:'Lora',serif}
+.date-btn .db-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.tag{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:3px}
+.tag-ig{background:rgba(63,89,39,.12);color:var(--verde)}
+.tag-wpp{background:rgba(224,123,26,.12);color:var(--ambar)}
+.tag-loja{background:rgba(212,146,10,.12);color:var(--dourado)}
+.tag-gold{background:rgba(212,146,10,.2);color:var(--dourado);border:1px solid rgba(212,146,10,.3)}
+.tag-prio{background:var(--ambar);color:var(--preto)}
+
+/* CAMPAIGN DETAIL */
+.campaign-detail{display:none;animation:slideIn .3s ease}
+.campaign-detail.visible{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.cd-hero{background:linear-gradient(135deg,var(--preto) 0%,var(--verde) 70%);border-radius:16px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.cd-hero::after{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04)}
+.cd-hero-label{color:var(--ambar);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.cd-hero-campaign{color:var(--branco);font-size:22px;font-weight:900;line-height:1.2;margin-bottom:8px}
+.cd-hero-slogan{color:var(--verde-menta);font-family:'Lora',serif;font-style:italic;font-size:14px;opacity:.9;margin-bottom:20px}
+.cd-meta{display:flex;flex-wrap:wrap;gap:10px}
+.cd-meta-item{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:8px 14px;display:flex;flex-direction:column;gap:2px}
+.cd-meta-item .mi-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--ambar-c)}
+.cd-meta-item .mi-val{font-size:12px;font-weight:600;color:var(--branco)}
+
+/* IDEA CENTRAL */
+.idea-central{background:linear-gradient(135deg,var(--verde-m),var(--verde));border-radius:12px;padding:20px 24px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start}
+.idea-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.idea-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--ambar-c);margin-bottom:6px}
+.idea-text{font-size:14px;color:var(--branco);line-height:1.7;font-family:'Lora',serif;font-style:italic}
+
+/* SECTIONS */
+.sections-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:700px){.sections-grid{grid-template-columns:1fr}}
+.section-card{background:var(--branco);border:1.5px solid var(--verde-menta);border-radius:12px;overflow:hidden}
+.section-card.full{grid-column:1/-1}
+.sc-head{background:var(--verde);padding:12px 18px;display:flex;align-items:center;gap:10px}
+.sc-head.amber{background:var(--ambar)}
+.sc-head.dourado{background:var(--dourado)}
+.sc-head.dark{background:var(--preto)}
+.sc-head .sc-icon{font-size:16px}
+.sc-head .sc-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--branco)}
+.sc-body{padding:16px 18px}
+
+/* PERIODO */
+.periodo-list{list-style:none;padding:0}
+.periodo-list li{padding:7px 0;border-bottom:1px solid var(--verde-menta);font-size:13px;color:var(--cinza-e);display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+.periodo-list li:last-child{border:none}
+.periodo-list li::before{content:'●';color:var(--ambar);font-size:8px;flex-shrink:0;margin-top:5px}
+
+/* INSTAGRAM POSTS */
+.ig-post{border:1.5px solid var(--verde-menta);border-left:4px solid var(--verde);border-radius:8px;padding:14px 16px;margin-bottom:10px;background:var(--cinza-c)}
+.ig-post:last-child{margin-bottom:0}
+.ig-tipo{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--verde);margin-bottom:6px}
+.ig-visual-label{font-size:11px;font-weight:700;color:var(--verde-m);margin-bottom:3px}
+.ig-visual-text{font-size:12px;color:var(--cinza-e);margin-bottom:10px;line-height:1.55}
+.ig-legenda-label{font-size:11px;font-weight:700;color:var(--verde-m);margin-bottom:4px}
+.ig-legenda-text{font-size:13px;color:var(--preto);line-height:1.7;white-space:pre-line;margin-bottom:8px}
+.ig-hashtags{font-size:11px;color:var(--verde-m);font-style:italic}
+
+/* WHATSAPP */
+.wpp-msg{border:1.5px solid rgba(224,123,26,.25);border-left:4px solid var(--ambar);border-radius:8px;padding:14px 16px;margin-bottom:10px;background:#fffaf3}
+.wpp-msg:last-child{margin-bottom:0}
+.wpp-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ambar);margin-bottom:8px}
+.wpp-text{font-size:13px;color:var(--cinza-e);line-height:1.75;white-space:pre-line}
+
+/* DECORAÇÃO */
+.deco-section{margin-bottom:12px}
+.deco-section-title{font-size:12px;font-weight:700;color:var(--verde);margin-bottom:6px}
+.deco-list{list-style:none;padding:0}
+.deco-list li{font-size:13px;color:var(--cinza-e);padding:5px 0;border-bottom:1px dashed var(--verde-menta);line-height:1.5;display:flex;gap:8px;align-items:flex-start}
+.deco-list li:last-child{border:none}
+.deco-list li::before{content:'🌿';font-size:11px;flex-shrink:0;margin-top:1px}
+
+/* OFERTAS TABLE */
+.ofertas-table{width:100%;border-collapse:collapse;font-size:13px}
+.ofertas-table th{background:var(--verde);color:var(--branco);padding:8px 12px;text-align:left;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.ofertas-table td{padding:10px 12px;border-bottom:1px solid var(--verde-menta);line-height:1.55;vertical-align:top}
+.ofertas-table tr:nth-child(even) td{background:var(--cinza-c)}
+.ofertas-table tr:last-child td{border:none}
+.setor-cell{font-weight:700;color:var(--verde);white-space:nowrap}
+
+/* IDENTIDADE */
+.id-box{background:linear-gradient(135deg,rgba(63,89,39,.07),rgba(108,134,84,.07));border:1.5px solid var(--verde-menta);border-radius:8px;padding:16px;font-size:13px;color:var(--cinza-e);line-height:1.75;font-family:'Lora',serif;font-style:italic}
+
+/* BACK BTN */
+.back-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid var(--verde-menta);color:var(--verde-m);font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;cursor:pointer;margin-bottom:20px;transition:all .2s}
+.back-btn:hover{background:var(--verde);color:var(--branco);border-color:var(--verde)}
+
+/* FOOTER */
+.footer{background:var(--preto);padding:20px 32px;text-align:center;margin-top:40px}
+.footer-slogan{color:var(--cinza-m);font-family:'Lora',serif;font-style:italic;font-size:12px}
+.footer-info{color:#444441;font-size:10px;margin-top:4px;text-transform:uppercase;letter-spacing:.08em}
+
+/* MANÁ DAY special */
+.mana-day-badge{display:inline-block;background:var(--noite);color:var(--neon);border:1px solid var(--neon);padding:3px 10px;border-radius:4px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-left:8px}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-label">Plano Trimestral de Campanhas</div>
+    <div class="header-title">Super Maná</div>
+    <div class="header-slogan">Verde que alimenta. Cuidado que acolhe.</div>
+    <div class="month-tabs">
+      <button class="month-tab active" onclick="setMonth('maio')">🌿 Maio 2026</button>
+      <button class="month-tab" onclick="setMonth('junho')">⚽ Junho 2026</button>
+      <button class="month-tab" onclick="setMonth('julho')">🏆 Julho 2026</button>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- ══════════ MAIO ══════════ -->
+  <div class="month-section active" id="section-maio">
+    <div class="month-header-bar">
+      <span class="mh-icon">🌿</span>
+      <div>
+        <div class="mh-title">Maio 2026</div>
+        <div class="mh-sub">2 campanhas · Hambúrguer + Maná Day</div>
+      </div>
+    </div>
+    <div class="dates-grid" id="grid-maio">
+      <button class="date-btn" onclick="openCampaign('hamburguer')">
+        <div class="db-date">28 de Maio</div>
+        <div class="db-name">Dia do Hambúrguer</div>
+        <div class="db-idea">Do açougue do Maná direto pra sua grelha, com o pão feito na casa do artesão da cidade.</div>
+        <div class="db-tags"><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Loja</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('manaday-maio')">
+        <div class="db-date">Última semana de Maio</div>
+        <div class="db-name">Maná Day <span class="mana-day-badge">Evento</span></div>
+        <div class="db-idea">O maior evento do mês: o verde nunca esteve tão bom. Fidelização, faturamento e experiência em loja.</div>
+        <div class="db-tags"><span class="tag tag-prio">Prioridade</span><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Loja</span></div>
+      </button>
+    </div>
+    <div class="campaign-detail" id="detail-maio"></div>
+  </div>
+
+  <!-- ══════════ JUNHO ══════════ -->
+  <div class="month-section" id="section-junho">
+    <div class="month-header-bar" style="background:linear-gradient(90deg,#2e6b2e,var(--verde-m))">
+      <span class="mh-icon">⚽</span>
+      <div>
+        <div class="mh-title">Junho 2026</div>
+        <div class="mh-sub">6 campanhas · Corpus Christi · Copa · Namorados · Jogos Brasil · São João · Maná Day</div>
+      </div>
+    </div>
+    <div class="dates-grid" id="grid-junho">
+      <button class="date-btn" onclick="openCampaign('corpus')">
+        <div class="db-date">04 de Junho</div>
+        <div class="db-name">Corpus Christi</div>
+        <div class="db-idea">Feriado longo é sinônimo de geladeira cheia e família reunida. Quem abastece bem antes, aproveita melhor depois.</div>
+        <div class="db-tags"><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('copa-abertura')">
+        <div class="db-date">11 de Junho</div>
+        <div class="db-name">Abertura da Copa do Mundo</div>
+        <div class="db-idea">A Copa começa no campo, a festa começa aqui. Lançamento da linha Copa no Maná para o mês inteiro.</div>
+        <div class="db-tags"><span class="tag tag-prio">Mês Copa</span><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Loja</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('namorados')">
+        <div class="db-date">12 de Junho</div>
+        <div class="db-name">Dia dos Namorados</div>
+        <div class="db-idea">Cozinhar juntos já é uma declaração de amor. A gente cuida do ingrediente.</div>
+        <div class="db-tags"><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Vitrine</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('jogo1')">
+        <div class="db-date">13 de Junho</div>
+        <div class="db-name">Brasil x Marrocos ⚽</div>
+        <div class="db-idea">Dia de jogo — petisco pronto, churrasco na brasa, cerveja gelada. Tudo começa aqui.</div>
+        <div class="db-tags"><span class="tag tag-ig">Stories</span><span class="tag tag-wpp">WhatsApp</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('jogo2')">
+        <div class="db-date">19 de Junho</div>
+        <div class="db-name">Brasil x Haiti ⚽</div>
+        <div class="db-idea">Segundo jogo do Brasil. Mesma mecânica, produtos em destaque renovados.</div>
+        <div class="db-tags"><span class="tag tag-ig">Stories</span><span class="tag tag-wpp">WhatsApp</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('saojao')">
+        <div class="db-date">24 de Junho</div>
+        <div class="db-name">São João + Brasil x Escócia ⚽🎆</div>
+        <div class="db-idea">Data dupla explosiva: Festa Junina + jogo do Brasil. Dois mundos, um só Maná.</div>
+        <div class="db-tags"><span class="tag tag-prio">Dupla</span><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Decoração</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('manaday-junho')">
+        <div class="db-date">Última semana de Junho</div>
+        <div class="db-name">Maná Day Copa <span class="mana-day-badge">Evento</span></div>
+        <div class="db-idea">Copa lá, Maná Day aqui — dois eventos, a mesma energia. Maior evento do mês com temática Copa.</div>
+        <div class="db-tags"><span class="tag tag-prio">Prioridade</span><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Loja</span></div>
+      </button>
+    </div>
+    <div class="campaign-detail" id="detail-junho"></div>
+  </div>
+
+  <!-- ══════════ JULHO ══════════ -->
+  <div class="month-section" id="section-julho">
+    <div class="month-header-bar" style="background:linear-gradient(90deg,#6b4a0e,var(--dourado))">
+      <span class="mh-icon">🏆</span>
+      <div>
+        <div class="mh-title">Julho 2026</div>
+        <div class="mh-sub">6 campanhas · Chocolate · Pizza · Final Copa · Amigo · Avós · Maná Day</div>
+      </div>
+    </div>
+    <div class="dates-grid" id="grid-julho">
+      <button class="date-btn" onclick="openCampaign('chocolate')">
+        <div class="db-date">07 de Julho</div>
+        <div class="db-name">Dia do Chocolate</div>
+        <div class="db-idea">Chocolate bom tem história, tem cheiro e tem o nome de quem fez. Parceiro artesanal como protagonista.</div>
+        <div class="db-tags"><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('pizza')">
+        <div class="db-date">10 de Julho</div>
+        <div class="db-name">Dia da Pizza</div>
+        <div class="db-idea">A melhor pizza começa com ingredientes frescos, não com entrega. Kit pizza caseira do Maná.</div>
+        <div class="db-tags"><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Ilha</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('final-copa')">
+        <div class="db-date">19 de Julho</div>
+        <div class="db-name">Grande Final da Copa 🏆</div>
+        <div class="db-idea">Pico máximo do trimestre. 39 dias de Copa. O jogo mais importante do mundo. A melhor torcida começa aqui.</div>
+        <div class="db-tags"><span class="tag tag-prio">Pico máximo</span><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Decoração</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('amigo')">
+        <div class="db-date">20 de Julho</div>
+        <div class="db-name">Dia do Amigo</div>
+        <div class="db-idea">Amigo bom merece mesa boa. E mesa boa começa no Super Maná.</div>
+        <div class="db-tags"><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('avos')">
+        <div class="db-date">26 de Julho</div>
+        <div class="db-name">Dia dos Avós</div>
+        <div class="db-idea">A comida da vovó tem ingrediente fresquinho e receita de carinho. O sabor que a gente nunca esquece.</div>
+        <div class="db-tags"><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Vitrine</span></div>
+      </button>
+      <button class="date-btn" onclick="openCampaign('manaday-julho')">
+        <div class="db-date">Última semana de Julho</div>
+        <div class="db-name">Maná Day Pós-Copa <span class="mana-day-badge">Evento</span></div>
+        <div class="db-idea">A Copa acabou. O verde continua. Encerramento do trimestre celebrando a identidade central do Maná.</div>
+        <div class="db-tags"><span class="tag tag-prio">Prioridade</span><span class="tag tag-ig">Instagram</span><span class="tag tag-wpp">WhatsApp</span><span class="tag tag-loja">Loja</span></div>
+      </button>
+    </div>
+    <div class="campaign-detail" id="detail-julho"></div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-slogan">Verde que alimenta. Cuidado que acolhe.</div>
+  <div class="footer-info">supermana.com.br · Itapuranga &amp; Uruaçu — GO · 2026</div>
+</footer>
+
+<script>
+const CAMPAIGNS = {
+
+'hamburguer': {
+  month: 'maio',
+  date: '28 de Maio de 2026',
+  name: 'O Hambúrguer Perfeito Começa Aqui',
+  slogan: 'Do açougue do Maná para a sua grelha, com o pão feito na casa do artesão da cidade.',
+  ideia: 'Transformar o Dia do Hambúrguer em uma celebração do açougue próprio do Maná e dos parceiros artesanais locais. A carne fresca moída no balcão + o pão feito pelo artesão da cidade criam uma narrativa de qualidade honesta que nenhum concorrente consegue replicar. A data conecta o diferencial real do Maná — frescor e origem conhecida — com um produto universal que todo mundo ama.',
+  meta: [['Período','25 a 28/mai'],['Pico','28/mai (quinta)'],['Extensão','até 31/mai (fim de semana)']],
+  periodo: [
+    'Início: 25/mai (quinta) — post de aquecimento no feed + primeiro disparo de WhatsApp',
+    'Pico: 28/mai (quinta) — Dia do Hambúrguer oficial, segundo disparo + reels',
+    'Extensão de fim de semana: campanha pode se estender até 31/mai aproveitando churrascos de domingo'
+  ],
+  instagram: [
+    { tipo:'FEED — Foto do produto', visual:'Composição top-down: carne moída fresca sobre tábua de madeira, pão artesanal ao lado, queijo e tomate como props. Fundo verde musgo. Logo no canto inferior esquerdo.', legenda:'A carne que vai no seu hambúrguer sai hoje do nosso açougue.\nSem mistério, sem conservante — só frescor de verdade. 🍔\n\nO pão? Feito pelo artesão da nossa cidade, quentinho e honesto como deve ser.\n\nMonta o seu do jeito que sua família gosta. A gente cuida do ingrediente.', hashtags:'#SuperManá #HamburguerArtesanal #AçougueManá #Itapuranga #Uruaçu' },
+    { tipo:'REELS — Processo', visual:'Vídeo 15-20s: mãos moldando a carne moída, temperando, e ao final mostrando o hambúrguer montado. Corte rápido, trilha animada. Texto na tela: "Sua carne. Do nosso açougue."', legenda:'Qual é a sua combinação favorita? 👇\nComentando aqui você ainda nos ajuda a trazer as melhores opções pra semana que vem.', hashtags:'#SuperManá #AçougueManá #HamburguerCaseiro #Itapuranga' },
+    { tipo:'STORIES — Votação', visual:'Story com enquete: "Qual você prefere no seu hambúrguer?" com duas opções: Queijo prato / Queijo cheddar. Fundo verde escuro com texto em âmbar.', legenda:'(conteúdo interativo — sem legenda, apenas enquete visual)', hashtags:'' },
+    { tipo:'FEED — Valorização do parceiro artesanal', visual:'Foto do pão artesanal do parceiro local com nome e rosto do produtor. Texto sobreposição: "Feito na casa do [Nome], fresquinho todo dia."', legenda:'Quando falamos em ingrediente de qualidade, falamos em gente de verdade por trás.\n\nNosso pão artesanal é feito pelo [Nome], aqui mesmo em [Cidade].\nFresquinho, honesto e com aquele sabor que você lembra da infância. 🍞\n\nVocê conhece quem faz o seu pão?', hashtags:'#ProdutorLocal #ArtesanalManá #SuperManá #Itapuranga #Uruaçu' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — Pré-campanha (25/mai)', texto:'🍔 Dia do Hambúrguer chegando, e a gente já se preparou pra você.\n\nNossa carne moída fresquinha + pão artesanal feito aqui na cidade.\n\nVem montar o seu do jeito que a família gosta. 🌿\nTe esperamos no Super Maná!' },
+    { titulo:'DISPARO 2 — Dia da ação (28/mai)', texto:'Hoje é Dia do Hambúrguer! 🍔🎉\n\nNosso açougue preparou a melhor carne moída da semana pra você.\nE o pão artesanal do [Nome] tá fresquinho esperando.\n\nVem buscar o seu hoje!' }
+  ],
+  deco: [
+    { titulo:'Entrada / Hortifruti (vitrine principal)', items:['Tomates, cebolas, alfaces e pimentões em destaque na entrada — ingredientes do hambúrguer em composição visual','Plaquinha artesanal: "Hoje é Dia do Hambúrguer — pegue seus ingredientes aqui"'] },
+    { titulo:'Açougue', items:['Banner "Carne moída fresquinha — moída aqui, na hora" no balcão','Se possível, demonstração ao vivo de moagem no horário de pico'] },
+    { titulo:'Corredor de frios / mercearia', items:['Ilha temática: carne moída + pão artesanal + queijo + molhos em exposição conjunta','Precinho visível para cada item com tag verde escrito à mão'] }
+  ],
+  ofertas: [
+    ['Açougue','Carne moída especial para hambúrguer (paleta ou fraldinha): leve 1kg, ganhe 100g extra. Destaque de origem no balcão.'],
+    ['Hortifruti','Combo hambúrguer: alface + tomate + cebola roxa com 15% de desconto quando comprados juntos'],
+    ['Artesanal','Pão de hambúrguer artesanal do [Nome do parceiro] em destaque — embalagem com tag "feito hoje por [Nome]"'],
+    ['Mercearia','Queijo prato e cheddar fatiados com desconto + molhos selecionados (mostarda, maionese) em oferta conjunta'],
+    ['Bebidas','Refrigerante 2L + suco em caixinha combo para acompanhar o hambúrguer']
+  ],
+  identidade:'Esta campanha reforça dois pilares centrais do Super Maná: o frescor real (carne moída no açougue próprio, ingredientes vivos no hortifruti) e o cuidado com a comunidade (parceiro artesanal local com nome e rosto visíveis). O hambúrguer se torna um veículo para a narrativa "do campo à mesa", transformando uma data simples em celebração de ingredientes honestos e de quem os faz com carinho.'
+},
+
+'manaday-maio': {
+  month: 'maio',
+  date: 'Última semana de Maio de 2026',
+  name: 'Maná Day — Maio Verde',
+  slogan: 'O maior dia de ofertas do mês chegou — e o verde nunca esteve tão bom.',
+  ideia: 'O Maná Day é o IP mais poderoso da marca — um evento mensal que transforma a compra rotineira em celebração de comunidade. A edição Maio Verde usa o hortifruti como vitrine central, a equipe como protagonista dos bastidores e o app como porta de entrada VIP. Objetivo duplo: aumentar faturamento do dia e fortalecer o vínculo com clientes fiéis.',
+  meta: [['Pré-aquecimento','3 dias antes'],['Disparo WPP','2 dias antes + dia'],['Pico','Sábado da última semana'],['App VIP','1h antes do público geral']],
+  periodo: [
+    'Pré-aquecimento: 3 dias antes — stories de contagem regressiva no Instagram',
+    'Disparo WhatsApp: 2 dias antes (quarta ou quinta) + manhã do dia do evento',
+    'Pico: sábado da última semana de maio',
+    'Exclusivo app: acesso 1h antes da abertura geral para usuários cadastrados'
+  ],
+  instagram: [
+    { tipo:'STORIES — Contagem regressiva (3 dias antes)', visual:'Story com contador: "3 dias para o Maná Day". Fundo verde noite (#1E2E14). Texto em verde neon. Criar expectativa sem revelar as ofertas.', legenda:'Já sabe o que tá vindo? 👀 Conta nos comentários o que você tá esperando ver no Maná Day!', hashtags:'#ManáDay #SuperManá #Itapuranga #Uruaçu' },
+    { tipo:'FEED — Revelação das ofertas (véspera)', visual:'Arte escura com logo do Maná Day (verde noite + verde neon + âmbar fogo). Listagem visual das ofertas em destaque.', legenda:'Amanhã é Maná Day. 💚\n\nAqui vai um adiantamento do que a gente preparou pra você:\n[listar 3 ofertas principais]\n\nUsuários do app entram 1h antes. Baixou o app?', hashtags:'#ManáDay #SuperManá #OfertasManá #Itapuranga' },
+    { tipo:'REELS — Bastidores da preparação', visual:'Vídeo curto da equipe preparando a loja para o evento — montando decoração, organizando produtos, sorrindo. Humaniza a marca.', legenda:'A equipe toda se preparou pra esse dia. 🌿\nVamos receber você com muito cuidado e com as melhores ofertas do mês.\n\nTe vejo amanhã no Maná Day!', hashtags:'#ManáDay #EquipeManá #SuperManá #Itapuranga #Uruaçu' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 2 dias antes', texto:'💚 Maná Day chegando!\n\nSexta e sábado com ofertas especiais nas duas lojas.\nQuem tem o app entra 1h antes — já baixou?\n\nPrepara a lista. A gente preparou o resto. 🌿' },
+    { titulo:'DISPARO 2 — Dia do evento', texto:'☀️ É hoje! Maná Day acontece agora!\n\nAbre às [horário]. Quem tem app: entra 1h antes com acesso VIP.\nAçougue, hortifruti e mercearia com tudo preparado pra você.\n\nTe esperamos no Super Maná!' }
+  ],
+  deco: [
+    { titulo:'Fachada e entrada', items:['Balões verdes + placa "MANÁ DAY — Acontece Hoje"','Hortifruti na entrada impecável com sinalização de origem de cada produto'] },
+    { titulo:'Interior da loja', items:['Ilha central com produtos em destaque e tags de oferta em âmbar','Equipe com crachá ou brinde especial do Maná Day','Som ambiente animado — diferente do dia normal'] }
+  ],
+  ofertas: [
+    ['Açougue','Frango inteiro + picanha: ofertas âncora do evento. Destaque no balcão com sinalização especial Maná Day.'],
+    ['Hortifruti','Combo semanal: sacola com 5 itens selecionados da semana por preço fixo especial'],
+    ['Artesanal','Pães e doces artesanais dos parceiros com embalagem especial Maná Day — exclusivo do dia'],
+    ['Mercearia','Leve 3 pague 2 em itens de limpeza + arroz e feijão em oferta âncora'],
+    ['Bebidas','Cerveja em fardo com desconto especial + refrigerante em multipacks']
+  ],
+  identidade:'O Maná Day é o evento que materializa o posicionamento da marca. A edição Maio Verde reforça frescor e cuidado, usando o hortifruti como elemento visual central e a equipe como protagonista — mostrando que "cuidado que acolhe" começa nas pessoas que trabalham ali. O acesso VIP pelo app transforma usuários em clientes privilegiados, aumentando fidelização e recorrência.'
+},
+
+'corpus': {
+  month: 'junho',
+  date: '04 de Junho de 2026',
+  name: 'Feriado Longo, Geladeira Cheia',
+  slogan: 'Quem abastece bem antes, aproveita melhor depois.',
+  ideia: 'Corpus Christi é uma data de conveniência pura. O Maná não precisa criar emoção — precisa estar presente com praticidade. A campanha capitaliza o comportamento de compra antecipada antes do feriado prolongado, posicionando as duas lojas como o lugar certo para se abastecer com qualidade antes de curtir o descanso merecido.',
+  meta: [['Início','02/jun (terça)'],['Pico','03/jun (véspera)'],['Feriado','04/jun — aberto']],
+  periodo: [
+    'Início: terça-feira 02/jun — primeiro disparo de WhatsApp e story de alerta',
+    'Pico: quarta 03/jun (véspera do feriado) — maior movimento para compra antecipada',
+    'Feriado: 04/jun — loja aberta, comunicação de última hora para quem deixou para depois'
+  ],
+  instagram: [
+    { tipo:'STORIES — Alerta de feriado (02/jun)', visual:'Story simples: "Corpus Christi na quinta. Você já abasteceu?" com ícone de geladeira e CTA para a loja.', legenda:'Feriado longo chegando! 🙌\nNossa dica: venha na quarta e saia com tudo que precisa sem pressa.\nHortifruti fresquinho esperando.', hashtags:'#SuperManá #FeriadoLongo #Itapuranga #Uruaçu' },
+    { tipo:'FEED — Foto de abastecimento (03/jun)', visual:'Foto de carrinho bem abastecido com hortifruti colorido em destaque. Fundo da loja ao fundo, desfocado.', legenda:'Feriado prolongado é sinônimo de reunião em família — e reunião boa começa com geladeira bem abastecida. 🥦🍗\n\nVenha na quarta e saia tranquilo para aproveitar o feriado do jeito que merece.\n\nO que nunca pode faltar no seu feriado?', hashtags:'#SuperManá #FeriadoCorpusChristi #AbasteceManá #Itapuranga' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 02/jun', texto:'🙏 Corpus Christi na quinta!\n\nJá que o feriado tá chegando, que tal abastecer antes e curtir sem preocupação?\n\nHortifruti, carnes e tudo que sua família precisa te esperam aqui. 🌿\nSuperManá — aberto amanhã no horário normal!' },
+    { titulo:'DISPARO 2 — 03/jun (véspera)', texto:'Amanhã é feriado! 🎉\nAinda dá tempo de se abastecer hoje.\n\nHortifruti fresquinho + açougue completo.\nVenha antes de fechar — te esperamos! 🌿' }
+  ],
+  deco: [
+    { titulo:'Entrada', items:['Hortifruti na entrada com destaque em "kits feriado" — frutas da estação agrupadas','Placa simples: "Abastece aqui, curte lá"','Sinalização de horário de funcionamento no feriado na entrada da loja'] }
+  ],
+  ofertas: [
+    ['Açougue','Frango inteiro e costela em oferta — itens âncora do feriado para churrasco e refeição em família'],
+    ['Hortifruti','Kit feriado: salada completa (alface, tomate, pepino, cenoura) com preço especial de conjunto'],
+    ['Artesanal','Pão caseiro e bolo artesanal para o café do feriado — destaque com origem do produtor'],
+    ['Mercearia','Arroz + feijão + macarrão com desconto por quantidade (compra de dois itens)'],
+    ['Bebidas','Suco natural embalado + refrigerante familiar em promoção de feriado']
+  ],
+  identidade:'Corpus Christi conecta a praticidade do Super Maná com o cuidado familiar: "abastecer bem é uma forma de cuidar de quem você ama". Reforça o papel da marca como parceira da rotina da família, não apenas um ponto de compra. Campanha de baixo esforço, alto retorno e presença garantida no momento certo.'
+},
+
+'copa-abertura': {
+  month: 'junho',
+  date: '11 de Junho de 2026',
+  name: 'Mês da Copa no Maná — Torcida Começa na Cozinha',
+  slogan: 'A Copa começa no campo, mas a festa começa aqui.',
+  ideia: 'A Copa do Mundo é a maior oportunidade de junho — mas o Maná não entra pela porta da guerra de preço de bebidas. Entra pelos ingredientes frescos e pelo cuidado com a experiência da torcida em casa. O lançamento da linha Copa transforma a loja inteira em território da torcida, com o hortifruti como vitrine e o açougue como protagonista dos petiscos. A campanha se sustenta por todo o mês, com picos em cada jogo do Brasil.',
+  meta: [['Teaser','08/jun (segunda)'],['Lançamento','11/jun (abertura)'],['Duração','Todo o mês de junho'],['Pico','Cada jogo do Brasil']],
+  periodo: [
+    'Teaser: 08/jun (segunda) — post de aquecimento "A Copa chega em 3 dias"',
+    'Lançamento da linha Copa: 11/jun — abertura oficial com decoração na loja',
+    'Campanha Copa se estende por todo o mês com pico a cada jogo do Brasil (13, 19 e 24/jun)',
+    'Encerramento: Maná Day Copa na última semana'
+  ],
+  instagram: [
+    { tipo:'FEED — Lançamento linha Copa (11/jun)', visual:'Arte temática Copa: bandeira do Brasil + produtos do Maná (cervejas, carnes, salgadinhos) na composição. Verde da marca + amarelo e verde da bandeira.', legenda:'A Copa do Mundo começa hoje. 🇧🇷⚽\n\nE no Super Maná, a gente já preparou tudo pra sua torcida ser a mais gostosa da cidade.\n\nCarnes fresquinhas, bebidas geladas e os petiscos que toda roda de amigos merece.\n\nQual é o petisco que não pode faltar na sua mesa de jogo?', hashtags:'#CopaDoMundo2026 #SuperManá #TorcidaManá #Itapuranga #Uruaçu' },
+    { tipo:'STORIES — Série Copa (semana inteira)', visual:'Sequência de 3-5 stories diários: "O que você precisa pra hoje" + produtos do dia + lembrete do próximo jogo do Brasil.', legenda:'(stories diários — conteúdo visual dinâmico, atualizar a cada jogo)', hashtags:'' },
+    { tipo:'REELS — Receita de petisco rápido', visual:'Vídeo 20-30s: mini linguiça assada com ingredientes do Maná. Texto na tela: "Pronto antes do apito."', legenda:'Aperitivo de Copa pronto em 10 minutos com ingredientes do nosso açougue e hortifruti. 🌿⚽\n\nQuer mais receitas de petiscos fáceis? Comenta "RECEITA" aqui embaixo!', hashtags:'#PetiscosCopa #SuperManá #CopaDoMundo2026 #Itapuranga' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 08/jun (aquecimento)', texto:'⚽ A Copa do Mundo começa na quinta-feira!\n\nO Super Maná já preparou tudo pra sua torcida:\ncarnes, petiscos, bebidas e o hortifruti de sempre, fresquinho.\n\nVem montar sua mesa de jogo com a gente! 🇧🇷' },
+    { titulo:'DISPARO 2 — 11/jun (abertura)', texto:'🇧🇷 Abre a Copa hoje!\n\nNossa linha Copa tá completa pra você:\n🥩 Açougue com tudo pra churrasco\n🍺 Bebidas geladas\n🌽 Petiscos e hortifruti fresquinho\n\nVem buscar antes do apito! Super Maná.' }
+  ],
+  deco: [
+    { titulo:'Entrada e fachada', items:['Bandeirinhas verdes e amarelas + placa "Linha Copa — tudo pra sua torcida"','Hortifruti em destaque com composição visual nas cores do Brasil'] },
+    { titulo:'Ilha Copa (interior da loja)', items:['Açougue + bebidas + salgadinhos + hortifruti agrupados com sinalização temática','Balcão do açougue com cardápio de "cortes para churrasco de Copa" em lousa ou banner'] }
+  ],
+  ofertas: [
+    ['Açougue','Combo churrasco Copa: frango + linguiça + espetinho de carne — kit com preço especial'],
+    ['Hortifruti','Milho verde, mandioca e batata palha caseira: os clássicos da torcida em destaque'],
+    ['Artesanal','Pão de alho artesanal do [Nome do parceiro] — "feito hoje pra sua grelha"'],
+    ['Mercearia','Salgadinhos e aperitivos em pacotes maiores para grupos'],
+    ['Bebidas','Cerveja em fardo com desconto Copa + refrigerante 2L + suco natural']
+  ],
+  identidade:'O Maná não compete em preço de cerveja com ninguém. Entra pela porta dos ingredientes frescos e do cuidado com a experiência. "A Copa começa no campo, a festa começa aqui" reforça que o Maná é o supermercado que cuida de quem cuida da reunião em família — posicionamento que nenhum concorrente consegue replicar com autenticidade.'
+},
+
+'namorados': {
+  month: 'junho',
+  date: '12 de Junho de 2026',
+  name: 'O Melhor Ingrediente é o Cuidado',
+  slogan: 'Cozinhar juntos já é uma declaração de amor. A gente cuida do ingrediente.',
+  ideia: 'Dia dos Namorados no Maná não fala de desconto — fala de cuidado. A narrativa de "cozinhar juntos é uma declaração de amor" conecta com o posicionamento central da marca. O hortifruti premium (morango, uva, figo) e os vinhos curados dão ao Maná um posicionamento sofisticado sem perder o calor familiar. Atenção: a data cai um dia após a abertura da Copa — posicionar como um contraponto mais íntimo e sentimental dentro do agito do mês.',
+  meta: [['Início','09/jun (terça)'],['Pico','11/jun (véspera) + 12/jun (dia)'],['Tom','Elegante e acolhedor']],
+  periodo: [
+    'Início: 09/jun (terça) — post de inspiração no Instagram',
+    'Pico: 11/jun (véspera) — vitrine especial na loja e post premium',
+    'Dia: 12/jun — segundo disparo de WhatsApp + stories de última hora'
+  ],
+  instagram: [
+    { tipo:'FEED — Inspiração (09/jun)', visual:'Foto de casal à mesa com jantar simples mas bem apresentado — hortifruti do Maná como protagonista. Tom quente, iluminação suave.', legenda:'O jantar mais bonito não é o mais caro.\nÉ o que foi feito com cuidado, com calma e com quem você ama. 🌿\n\nQual é a receita que você faria pra impressionar?', hashtags:'#SuperManá #DiaDoNamorado #CozinharJuntos #Itapuranga #Uruaçu' },
+    { tipo:'FEED — Vitrine premium (11/jun)', visual:'Composição de produtos premium: vinho, espumante, chocolate fino, morango, queijo especial. Fundo escuro (verde noite). Elegância e sofisticação.', legenda:'Para quem quer fazer um jantar especial em casa. 🍷\n\nNossos vinhos, espumantes e os morangos frescos de hoje.\nUm jantar simples com ingredientes certos vale qualquer restaurante.\n\nO que vai ser: janta em casa ou fora?', hashtags:'#SuperManá #NamoradosManá #VinhoManá #Itapuranga' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 09/jun', texto:'💚 Dia dos Namorados chegando, e a gente tem tudo pra fazer um jantar especial em casa.\n\nMorangos fresquinhos, vinhos selecionados e chocolates esperando por você.\n\nO ingrediente mais bonito você já tem — cuida bem. 🌹' },
+    { titulo:'DISPARO 2 — 12/jun (dia)', texto:'Feliz Dia dos Namorados! 💚🌹\n\nSe a noite ainda não foi planejada, a gente te salva:\nmorangos, espumante e um jantar feito em casa com muito amor.\n\nVem buscar hoje no Super Maná!' }
+  ],
+  deco: [
+    { titulo:'Entrada e vitrine', items:['Vitrine com morangos, flores (se possível), vinhos e chocolates em composição elegante','Hortifruti: morangos, uvas e figos em destaque com etiquetas "Perfeitos para o jantar especial"'] },
+    { titulo:'Corredor de bebidas', items:['Vinhos e espumantes sinalizados com tag "Para o 12 de Junho"','Placa suave: "O melhor ingrediente é o cuidado. Feliz Dia dos Namorados."'] }
+  ],
+  ofertas: [
+    ['Açougue','Filé mignon e frango marinado: cortes nobres em destaque para o jantar em casa'],
+    ['Hortifruti','Morangos frescos, uvas e figos: frutas premium com apresentação cuidada'],
+    ['Artesanal','Bolo ou torta artesanal do [Nome do parceiro] — "feito hoje, com carinho de quem entende"'],
+    ['Mercearia','Cesta Namorados: chocolate + biscoito importado + café especial como kit sugerido'],
+    ['Bebidas','Vinho tinto + espumante: oferta especial com curadoria — "dois rótulos para dois momentos"']
+  ],
+  identidade:'A campanha eleva o posicionamento do Maná para o território emocional mais profundo: amor e cuidado. "O melhor ingrediente é o cuidado" é uma síntese perfeita do posicionamento da marca. O hortifruti premium transforma ingredientes em gesto afetivo, e os vinhos curados posicionam o Maná como opção sofisticada sem perder o calor do vizinho de confiança.'
+},
+
+'jogo1': {
+  month: 'junho',
+  date: '13 de Junho de 2026',
+  name: 'Dia de Jogo — Brasil x Marrocos',
+  slogan: 'Seu petisco mais gostoso começa no nosso açougue e hortifruti.',
+  ideia: 'Mecânica simples e eficiente: cada jogo do Brasil é uma mini-campanha de 24h. O objetivo é associar o Super Maná ao momento de torcida — quem pensa em petisco, pensa no Maná. Um único disparo de WhatsApp na manhã do jogo + stories ao longo do dia já garantem presença de marca no momento mais animado do mês.',
+  meta: [['Disparo WPP','Manhã do jogo'],['Stories','Ao longo do dia'],['Jogo','19h, hora de Brasília']],
+  periodo: [
+    'Único disparo de WhatsApp na manhã do jogo (entre 8h e 10h)',
+    'Stories ao longo do dia mostrando produtos disponíveis',
+    'Brasil x Marrocos: 13/jun, sábado, 19h (horário de Brasília)'
+  ],
+  instagram: [
+    { tipo:'STORIES — Manhã do jogo', visual:'Template de story: "Hoje tem Brasil!" com horário do jogo, produto destaque (espetinho + cerveja) e CTA "Bora buscar antes do apito!"', legenda:'(story dinâmico, sem legenda fixa — produto em destaque: espetinho e cerveja)', hashtags:'#DiaDeJogo #Brasil2026 #SuperManá #Itapuranga #Uruaçu' }
+  ],
+  wpp: [
+    { titulo:'DISPARO — Manhã do jogo (13/jun)', texto:'🇧🇷 Hoje tem Brasil! 19h — Brasil x Marrocos\n\nPetisco pronto, churrasco na brasa, cerveja gelada?\nTudo isso começa aqui no Super Maná.\n\nAinda dá tempo de buscar o seu! 🌿⚽' }
+  ],
+  deco: [
+    { titulo:'Dia de jogo', items:['Ilha de petiscos na entrada: salgadinhos, amendoim, linguiça','Placa: "Hoje tem jogo — seu petisco está aqui"','Se possível, transmissão do jogo em televisor na entrada no horário da partida'] }
+  ],
+  ofertas: [
+    ['Açougue','Espetinho + linguiça: combo petisco de jogo com preço especial no dia'],
+    ['Hortifruti','Milho verde + mandioca cozida: clássicos da torcida em destaque'],
+    ['Artesanal','Pão de alho do [parceiro] fresco no dia — "chegou hoje pra sua churrasqueira"'],
+    ['Mercearia','Salgadinho + amendoim + biscoito salgado em oferta agrupada "Kit Petisco"'],
+    ['Bebidas','Cerveja + refrigerante: promoção relâmpago no dia do jogo até o horário da partida']
+  ],
+  identidade:'A mecânica de "dia de jogo" é repetida nos três jogos do Brasil (13, 19 e 24/jun), criando um padrão de presença que associa o Maná ao ritual da torcida. Simples, consistente e eficiente — exatamente o que uma campanha de varejo deve ser em dias de Copa.'
+},
+
+'jogo2': {
+  month: 'junho',
+  date: '19 de Junho de 2026',
+  name: 'Dia de Jogo — Brasil x Haiti',
+  slogan: 'A noite promete — e a gente preparou o petisco.',
+  ideia: 'Segundo jogo do Brasil, mesma mecânica do dia 13 — mas com produto em destaque diferente para manter frescor na comunicação. O jogo é às 21h30, o que favorece a compra da tarde/início da noite. Boa oportunidade para destacar bebidas e petiscos noturnos.',
+  meta: [['Disparo WPP','Manhã/tarde do dia'],['Stories','A partir das 16h'],['Jogo','21h30, hora de Brasília']],
+  periodo: [
+    'Disparo de WhatsApp na manhã ou início da tarde (entre 8h e 14h)',
+    'Stories a partir das 16h com produto em destaque atualizado',
+    'Brasil x Haiti: 19/jun, sexta, 21h30 (horário de Brasília)'
+  ],
+  instagram: [
+    { tipo:'STORIES — Tarde do jogo', visual:'Template de story: "Hoje tem Brasil! 21h30." Produto destaque: cerveja + salgadinho + queijo. CTA "Ainda dá tempo!"', legenda:'(story dinâmico — produto destaque diferente do jogo 1)', hashtags:'#DiaDeJogo #Brasil2026 #SuperManá #Itapuranga' }
+  ],
+  wpp: [
+    { titulo:'DISPARO — Manhã do jogo (19/jun)', texto:'🇧🇷 Hoje tem Brasil! 21h30 — Brasil x Haiti\n\nA noite promete! Venha buscar seus petiscos e bebidas.\nHortifruti fresquinho + açougue completo esperando. 🌿⚽\n\nVem antes do apito!' }
+  ],
+  deco: [
+    { titulo:'Dia de jogo', items:['Ilha de petiscos atualizada com novos destaques do dia','Placa: "Brasil joga hoje — petisco fresquinho aqui"'] }
+  ],
+  ofertas: [
+    ['Açougue','Frango temperado + asa de frango: petisco noturno em oferta do dia'],
+    ['Hortifruti','Amendoim cru para torrar em casa + milho para pipoca: petiscos caseiros em destaque'],
+    ['Artesanal','Pão de queijo artesanal do [parceiro] — petisco noturno perfeito'],
+    ['Mercearia','Chips + biscoito salgado + amendoim em oferta "Kit Noite de Jogo"'],
+    ['Bebidas','Fardo de cerveja lata + refrigerante lata: combo noturno com desconto']
+  ],
+  identidade:'Consistência é a chave da mecânica de dias de jogo. A repetição cria associação: todo jogo do Brasil = lembrar do Maná. O produto em destaque diferente a cada jogo evita repetição na comunicação e mantém o interesse.'
+},
+
+'saojao': {
+  month: 'junho',
+  date: '24 de Junho de 2026',
+  name: 'Festa na Roça, Sabor de Casa',
+  slogan: 'São João no interior tem cheiro de canjica, fogueira e de quem cuida com carinho.',
+  ideia: 'Data dupla explosiva: São João + jogo do Brasil (19h). Dois mundos que se complementam perfeitamente no interior goiano. A Festa Junina é a data mais autêntica para o Maná — conecta diretamente com milho fresco, produtores locais nos doces artesanais, e o pertencimento à cidade. A comunicação une as duas celebrações em um único dia extraordinário: canjica de manhã, petisco de jogo à tarde.',
+  meta: [['Início campanha','19/jun'],['Pico','24/jun'],['Eventos','São João + Brasil x Escócia (19h)'],['Decoração','19 a 24/jun']],
+  periodo: [
+    'Início: 19/jun — primeiro post temático de Festa Junina (data do 2º jogo já ativa o clima)',
+    'Decoração festiva na loja de 19 a 24/jun',
+    'Pico: 24/jun — dois disparos (manhã junina + tarde/jogo do Brasil)',
+    'Brasil x Escócia: 24/jun, quarta, 19h (horário de Brasília)'
+  ],
+  instagram: [
+    { tipo:'FEED — Valorização cultural (19/jun)', visual:'Foto de produtos juninos: milho, amendoim, canela, cravo, coco, rapadura. Fundo rústico com tecido xadrez. Tom quente.', legenda:'São João tem cheiro de milho assado e sabor de reunião em família. 🌽🎆\n\nOs ingredientes pra sua festa junina mais gostosa já chegaram no Maná.\nTudo fresco, tudo de qualidade.\n\nQual receita junina você não abre mão?', hashtags:'#SãoJoão2026 #FestinhaJunina #SuperManá #Itapuranga #Uruaçu' },
+    { tipo:'REELS — Receita junina (22/jun)', visual:'Vídeo 20-30s mostrando canjica simples sendo preparada com ingredientes do Maná. Música junina de fundo.', legenda:'Canjica cremosa em 20 minutos com o milho do nosso hortifruti. 🌽💛\n\nNossa equipe testou e aprovou — é a receita mais fácil e mais gostosa para a festa.\n\nSalva esse reel e bora pra cozinha!', hashtags:'#CanjicaManá #FestinhaJunina #SuperManá #ReceitaFácil' },
+    { tipo:'STORIES — Dupla do dia (24/jun)', visual:'Dois stories seguidos: "🎆 São João!" + "⚽ Brasil joga hoje às 19h!" — mesma data, dobro de motivo.', legenda:'(story sequencial — São João + lembrete do jogo do Brasil)', hashtags:'' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 19/jun', texto:'🎆 Festa Junina chegando!\n\nMilho verde, amendoim, coco e tudo pra sua canjica estão chegando fresquinhos aqui no Super Maná.\n\nFaz a sua festa com o sabor que você lembra da infância. 🌽' },
+    { titulo:'DISPARO 2 — 24/jun (São João + Jogo)', texto:'🎆🇧🇷 Hoje é dia duplo!\n\nSão João + Brasil x Escócia às 19h.\nCanjica, quentão e os petiscos do jogo esperando por você.\n\nVem buscar tudo de uma vez. Super Maná! 🌿' }
+  ],
+  deco: [
+    { titulo:'Entrada e interior (19 a 24/jun)', items:['Bandeirinhas de festa junina coloridas + hortifruti com milho, cenoura, mandioca em destaque','Ilha junina na mercearia: paçoca, canjica, amendoim, rapadura, cocada agrupados','Placa: "São João tem cheiro de milho fresco — e ele está aqui"'] },
+    { titulo:'Dia 24 (data especial)', items:['Se possível: degustação de canjica ou paçoca no dia 24','Sinalização dupla na loja: São João (manhã/tarde) + Copa (entrada da noite)'] }
+  ],
+  ofertas: [
+    ['Açougue','Frango caipira e carne de porco: os clássicos da festa junina em oferta conjunta'],
+    ['Hortifruti','Milho verde, mandioca, batata-doce e macaxeira: kit festa junina com precinho especial'],
+    ['Artesanal','Cocada, paçoca e bolo de milho artesanal do [parceiro] — "feito igual antigamente"'],
+    ['Mercearia','Canjica + amendoim + coco ralado + canela + cravo: kit completo para as receitas juninas'],
+    ['Bebidas','Quentão pronto ou ingredientes para fazer em casa + suco de milho verde']
+  ],
+  identidade:'São João é a data mais autêntica para o interior goiano e a mais alinhada ao DNA do Super Maná: frescor do milho colhido, sabor de comida feita em casa, produtores locais nos doces artesanais. "Festa na Roça, Sabor de Casa" reforça o pertencimento à cidade e o orgulho local que a marca carrega. A fusão com o jogo do Brasil transforma o dia em celebração dupla única.'
+},
+
+'manaday-junho': {
+  month: 'junho',
+  date: 'Última semana de Junho de 2026',
+  name: 'Maná Day Copa',
+  slogan: 'Copa lá, Maná Day aqui — dois eventos, a mesma energia.',
+  ideia: 'O Maná Day de junho é potencializado pela energia da Copa do Mundo. Com o Brasil já nas oitavas de final (ou próximo delas), a torcida está no auge. O evento absorve toda a energia da Copa e a transforma em faturamento para o supermercado — kit churrasco Copa como oferta âncora, acesso VIP pelo app e decoração que une Maná Day e Copa em uma experiência única.',
+  meta: [['Pré-evento','2 dias antes'],['Pico','Sábado da última semana'],['App VIP','1h antes'],['Temática','Copa do Mundo']],
+  periodo: [
+    'Pré-aquecimento: 2 dias antes com revelação das ofertas Copa especiais',
+    'Disparo WhatsApp: véspera + manhã do evento',
+    'Pico: sábado da última semana de junho',
+    'Usuários do app: acesso 1h antes com prévia exclusiva das ofertas'
+  ],
+  instagram: [
+    { tipo:'FEED — Revelação das ofertas Copa (véspera)', visual:'Arte Maná Day com elementos Copa: verde noite + neon + bandeira do Brasil integrada ao logo do evento.', legenda:'Amanhã é Maná Day Copa. ⚽💚\n\nAs maiores ofertas do mês + tudo pra sua torcida.\nUsuários do app entram 1h antes — baixou?\n\nAmanhã a lista de ofertas chega completa. Fica de olho!', hashtags:'#ManáDay #CopaDoMundo2026 #SuperManá #Itapuranga #Uruaçu' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 2 dias antes', texto:'⚽💚 Maná Day de Copa chegando!\n\nNessa semana tem as melhores ofertas do mês + tudo pra sua torcida.\nUsuários do app entram 1h antes — baixou o app?\n\nFica de olho — segunda confirmamos tudo!' },
+    { titulo:'DISPARO 2 — Dia do evento', texto:'⚽ MANÁ DAY COPA É HOJE!\n\nAbre às [horário] — app users com acesso VIP.\nKit churrasco Copa, bebidas, hortifruti fresquinho e muito mais.\n\nTe esperamos! 🌿🇧🇷' }
+  ],
+  deco: [
+    { titulo:'Decoração Maná Day Copa', items:['Mescla Maná Day (verde escuro + neon) com elementos Copa (bandeiras, verde e amarelo)','Ilha Copa centralizada com kit churrasco Copa em destaque','Equipe com crachá especial Maná Day Copa'] }
+  ],
+  ofertas: [
+    ['Açougue','Kit churrasco Copa: picanha + frango + linguiça — oferta âncora do evento com sinalização especial'],
+    ['Hortifruti','Sacola verde da semana: 7 itens selecionados por preço fixo especial Maná Day'],
+    ['Artesanal','Pão de alho + pão caseiro: kit artesanal especial Maná Day com embalagem exclusiva'],
+    ['Mercearia','Salgadinhos + petiscos Copa em pacotes maiores com desconto Maná Day'],
+    ['Bebidas','Fardo de cerveja + caixa de refrigerante: combo Copa com o maior desconto do mês']
+  ],
+  identidade:'O Maná Day Copa une os dois maiores ativos de junho — o evento mensal da marca e a Copa do Mundo — em uma experiência única. Reforça o posicionamento de supermercado que cuida da torcida com qualidade e frescor, não apenas com promoção de preço.'
+},
+
+'chocolate': {
+  month: 'julho',
+  date: '07 de Julho de 2026',
+  name: 'Feito com Carinho, Direto da Mão de Quem Faz',
+  slogan: 'Chocolate bom tem história, tem cheiro e tem o nome de quem fez.',
+  ideia: 'O Dia do Chocolate é a data perfeita para a narrativa de produtores locais que é um dos maiores diferenciais do Maná. Ao nomear o produtor artesanal e contar sua história, o supermercado transforma um produto em uma experiência emocional genuína. Uma campanha de baixo custo, alto impacto emocional e que fortalece o ecossistema local de produtores parceiros.',
+  meta: [['Início','04/jul (sábado)'],['Pico','07/jul (terça)'],['Protagonista','Parceiro artesanal local']],
+  periodo: [
+    'Início: 04/jul (sábado) — post de apresentação do produtor parceiro com nome e rosto',
+    'Aquecimento: 05/jul e 06/jul — reels do processo artesanal',
+    'Pico: 07/jul (terça) — oferta especial e segundo disparo de WhatsApp'
+  ],
+  instagram: [
+    { tipo:'FEED — Apresentação do produtor (04/jul)', visual:'Foto do produtor/parceiro artesanal segurando seu produto. Fundo natural, autêntico. Nome em destaque na imagem.', legenda:'Conhece a [Nome do produtor parceiro]?\n\nEla faz os chocolates artesanais que chegam aqui no Super Maná. 🍫\nCada pedaço tem sabor de cuidado, de tempo e de quem entende do que faz.\n\nDia 07 é Dia do Chocolate — e a gente vai celebrar com quem merece o crédito.', hashtags:'#SuperManá #ChocolateArtesanal #ProdutorLocal #Itapuranga #Uruaçu' },
+    { tipo:'REELS — Processo artesanal', visual:'Pequeno vídeo do produtor mostrando o processo. Alternativa: unboxing dos chocolates recebidos na loja com destaque para a embalagem e origem.', legenda:'Do cuidado das mãos de quem faz ao seu paladar. 🍫\nAssim funciona o chocolate artesanal que a gente escolheu pra ter aqui.\n\nVocê já experimentou?', hashtags:'#ChocolateArtesanal #SuperManá #FeitoComCarinho #Itapuranga' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 04/jul', texto:'🍫 Dia do Chocolate chegando!\n\nA gente separou os chocolates artesanais da [Nome do parceiro] pra celebrar com você.\nFeito aqui pertinho, com ingredientes selecionados.\n\nVem conhecer antes que acabe. 🌿' },
+    { titulo:'DISPARO 2 — 07/jul', texto:'Feliz Dia do Chocolate! 🍫💚\n\nHoje o destaque é pra [Nome do parceiro] — artesã da nossa região.\nOs chocolates dela chegaram fresquinhos aqui no Super Maná.\n\nVem buscar o seu!' }
+  ],
+  deco: [
+    { titulo:'Exposição artesanal', items:['Mesa especial na entrada com chocolates artesanais e identificação do produtor','Tag artesanal em cada produto: "Feito pela [Nome], em [Cidade]. Feito hoje."','Placa: "Chocolate com história tem outro sabor"','Hortifruti: morango e banana em destaque como combinações com chocolate'] }
+  ],
+  ofertas: [
+    ['Açougue','Sem oferta especial — foco nos artesanais e hortifruti para combinações'],
+    ['Hortifruti','Morango + banana + coco: frutas para combinações ou fondue de chocolate'],
+    ['Artesanal','Chocolates artesanais do [parceiro] em destaque + kit presente embalado'],
+    ['Mercearia','Chocolate em barra + achocolatado + cacau em pó em oferta conjunta'],
+    ['Bebidas','Leite integral + creme de leite: ingredientes para receitas com chocolate']
+  ],
+  identidade:'Ao nomear o produtor, o Maná transforma um produto em uma história — reforçando o pilar de cuidado com a comunidade e de curadoria local. Uma campanha de baixíssimo custo com alto impacto emocional que nenhum grande supermercado consegue fazer de forma autêntica.'
+},
+
+'pizza': {
+  month: 'julho',
+  date: '10 de Julho de 2026',
+  name: 'Kit Pizza Maná — Do Fresco ao Forno',
+  slogan: 'A melhor pizza começa com ingredientes frescos, não com entrega.',
+  ideia: 'Pizza caseira é uma metáfora perfeita para o posicionamento do Maná: você faz com amor, a gente cuida do ingrediente. A campanha posiciona o Maná como alternativa ao delivery — não pelo preço, mas pela experiência de fazer em casa com ingredientes frescos. O hortifruti (tomate, pimentão) e os parceiros artesanais (massa fresca) são os protagonistas.',
+  meta: [['Início','08/jul'],['Pico','10/jul (quinta)'],['Foco','Kit pizza caseira completo']],
+  periodo: [
+    'Início: 08/jul (terça) — primeiro post de inspiração com ingredientes',
+    'Aquecimento: 09/jul — reels do kit pizza montado',
+    'Pico: 10/jul (quinta) — Dia da Pizza, segundo disparo e oferta especial'
+  ],
+  instagram: [
+    { tipo:'FEED — Ingredientes fresh (08/jul)', visual:'Foto top-down de todos os ingredientes para pizza sobre tábua: tomate, manjericão, mussarela, presunto, pimentão colorido. Fotografia rica e colorida.', legenda:'Pizza boa não precisa de entregador. 🍕🌿\n\nQuando você usa tomate fresco do hortifruti, mussarela da fatia e manjericão folha a folha...\no resultado é diferente — e você sabe disso.\n\nQual o recheio favorito lá em casa?', hashtags:'#PizzaCaseira #SuperManá #DiadaPizza #Itapuranga #Uruaçu' },
+    { tipo:'REELS — Kit pizza montado', visual:'Vídeo mostrando os ingredientes sendo selecionados no hortifruti e açougue do Maná e o resultado final de uma pizza caseira. Trilha animada.', legenda:'30 minutos. 1 família feliz. Ingredientes do Super Maná. 🍕\n\nMonta seu kit pizza com a gente e faz hoje à noite!\n\nSalva esse reel e bora!', hashtags:'#KitPizzaManá #SuperManá #PizzaCaseira #Itapuranga' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 08/jul', texto:'🍕 Dia da Pizza chegando!\n\nTomate fresco, mussarela fatiada, manjericão e os melhores ingredientes esperando por você.\nMonta o kit pizza aqui e faz a melhor da cidade. 🌿\n\nSuper Maná, te vê quinta!' },
+    { titulo:'DISPARO 2 — 10/jul', texto:'🍕 Hoje é Dia da Pizza!\n\nKIT PIZZA MANÁ: tomate + mussarela + presunto + hortifruti fresco por preço especial.\n\nVem buscar hoje e faz a melhor pizza da cidade lá em casa! 🌿' }
+  ],
+  deco: [
+    { titulo:'Entrada e ilha pizza', items:['Entrada: tomates, pimentões e manjericão em destaque — "Ingredientes perfeitos para sua pizza caseira"','Ilha kit pizza: hortifruti + frios + artesanal agrupados com placa "Monte o seu kit"','Balcão de frios: mussarela fatiada na hora com destaque "Fatiado hoje para você"'] }
+  ],
+  ofertas: [
+    ['Açougue','Presunto e calabresa fatiados: ingredientes para pizza em oferta "Kit Pizza" com desconto conjunto'],
+    ['Hortifruti','Tomate + pimentão + cebola + manjericão: combo pizza com preço especial'],
+    ['Artesanal','Massa de pizza artesanal do [parceiro] — "feita hoje, pronta pra assar"'],
+    ['Mercearia','Molho de tomate + azeitona + orégano: temperos para pizza em oferta agrupada'],
+    ['Bebidas','Refrigerante 2L + suco: bebida para acompanhar a pizza da família']
+  ],
+  identidade:'A pizza caseira reforça o posicionamento do Maná: você faz com amor, a gente cuida do ingrediente. Ao posicionar o Maná como alternativa ao delivery pela qualidade do ingrediente — e não pelo preço —, a marca ocupa um território emocional que nenhum app de entrega pode disputar.'
+},
+
+'final-copa': {
+  month: 'julho',
+  date: '19 de Julho de 2026',
+  name: 'Grande Final — Sua Torcida Começa no Super Maná',
+  slogan: '39 dias de Copa. O jogo mais importante do mundo. A melhor torcida começa aqui.',
+  ideia: 'Pico máximo do trimestre. A Final da Copa é o encerramento de toda a narrativa Copa que começou em 11/jun. O Maná se consolida como o supermercado que cuidou da torcida do primeiro jogo à Grande Final — e agora entrega a experiência máxima. Decoração máxima, maior desconto do trimestre em bebidas e o kit churrasco mais completo do mês. Uma data que deve gerar buzz espontâneo se executada com energia.',
+  meta: [['Pré-Final','16/jul (quinta)'],['Véspera','18/jul (sábado)'],['Final','19/jul (domingo), 18h'],['Tom','Energia máxima']],
+  periodo: [
+    'Pré-Final: 16/jul (quinta) — aquecimento digital "Faltam 3 dias"',
+    'Véspera: 18/jul (sábado) — disparo principal + decoração máxima instalada',
+    'Dia da Final: 19/jul (domingo) — abastecimento matinal + stories ao vivo',
+    'Final às 18h de Brasília — abre a loja cedo para última compra'
+  ],
+  instagram: [
+    { tipo:'FEED — Aquecimento (16/jul)', visual:'Arte Copa: "Faltam 3 dias para a Grande Final". Fundo verde noite com elementos âmbar e verde neon. Energia de evento especial.', legenda:'Em 3 dias o mundo para pra ver o maior jogo do futebol. 🏆⚽\n\nE o Super Maná já tá se preparando pra fazer sua torcida ser a mais gostosa da cidade.\n\nO que não pode faltar na sua mesa de jogo? Comenta aqui!', hashtags:'#GrandeFinal #CopaDoMundo2026 #SuperManá #Itapuranga #Uruaçu' },
+    { tipo:'REELS — Kit Grande Final revelado (18/jul)', visual:'Vídeo rápido mostrando os produtos do kit especial: churrasco, bebidas, petiscos, hortifruti. Montagem de torcida em casa.', legenda:'Kit Grande Final Maná: tudo pra sua torcida do maior jogo do ano. 🏆🇧🇷\n\nAçougue completo + petiscos + bebidas geladas + hortifruti fresquinho.\n\nVem buscar hoje ou amanhã cedo — a final é às 18h!', hashtags:'#GrandeFinal #CopaDoMundo2026 #TorcidaManá #SuperManá' },
+    { tipo:'STORIES — Ao vivo (19/jul manhã)', visual:'Stories mostrando o movimento na loja pela manhã, produtos disponíveis, equipe animada.', legenda:'(stories em tempo real — sem legenda fixa)', hashtags:'' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 16/jul', texto:'🏆 Grande Final da Copa em 3 dias!\n\nO Super Maná tá preparando a melhor linha de produtos pra sua torcida.\n\nFica de olho — na sexta revelamos tudo. 👀⚽' },
+    { titulo:'DISPARO 2 — 18/jul (véspera)', texto:'🏆⚽ Final da Copa amanhã, 18h!\n\nVem buscar hoje:\n🥩 Churrasco completo no açougue\n🌽 Hortifruti fresquinho\n🍺 Bebidas geladas\n\nAmanhã a gente abre cedo também. Te esperamos, torcedor!' }
+  ],
+  deco: [
+    { titulo:'Decoração máxima (a maior do trimestre)', items:['Fachada: bandeiras, verde e âmbar, balões — maior decoração do trimestre','Entrada: hortifruti em destaque Copa + ilha de churrasco montada na porta','Cartaz: "Grande Final — sua torcida começa aqui"','Equipe: crachá ou brinde especial Grande Final'] },
+    { titulo:'Experiência extra', items:['Se possível: televisor na entrada com transmissão do jogo no dia 19','Som ambiente com narração/trilha de Copa pelo horário da manhã'] }
+  ],
+  ofertas: [
+    ['Açougue','Kit churrasco Grande Final: picanha + frango + linguiça + carvão — oferta especial máxima do trimestre'],
+    ['Hortifruti','Milho, mandioca, salada e frutas: tudo para a mesa de torcida completa'],
+    ['Artesanal','Pão de alho Grande Final do [parceiro] — embalagem comemorativa especial'],
+    ['Mercearia','Kit petisco Copa: salgadinho + amendoim + biscoito — leve 3 com desconto'],
+    ['Bebidas','Maior desconto do trimestre em fardo de cerveja + combo refrigerante + suco grande']
+  ],
+  identidade:'A Final da Copa consolida o Maná como o supermercado da torcida — que esteve presente do primeiro jogo à Grande Final. "Sua torcida começa aqui" é a síntese perfeita do trimestre: cuidado com o ingrediente, frescor do hortifruti e acolhimento da equipe no dia mais animado do ano.'
+},
+
+'amigo': {
+  month: 'julho',
+  date: '20 de Julho de 2026',
+  name: 'Reunião Boa Começa com Ingrediente Honesto',
+  slogan: 'Amigo bom merece mesa boa. E mesa boa começa no Super Maná.',
+  ideia: 'Um dia depois da Grande Final da Copa, o Dia do Amigo chega como uma transição natural de agito coletivo para afeto genuíno. A campanha aproveita a energia ainda alta do fim de semana e a transforma em celebração de vínculos reais. Tom leve, caloroso e sem esforço de comunicação pesado — o Dia do Amigo não precisa de grande estrutura, apenas de uma presença bem colocada.',
+  meta: [['Período','18 a 20/jul'],['Pico','20/jul (segunda)'],['Tom','Leve e afetuoso']],
+  periodo: [
+    'Início: 18/jul — post de inspiração no feed (junto com comunicação da Final da Copa)',
+    'Pico: 20/jul (segunda) — disparo de WhatsApp + post de celebração'
+  ],
+  instagram: [
+    { tipo:'FEED — Celebração (20/jul)', visual:'Foto de mesa de petiscos bem montada com ingredientes do Maná. Tom acolhedor e quente.', legenda:'Reunião de amigos: o remédio pra semana pesada. 💚\n\nA gente cuida dos ingredientes, você cuida de quem aparece.\n\nQuem você chamaria pra uma noite assim hoje?', hashtags:'#DiaDoAmigo #SuperManá #ReuniaDeAmigos #Itapuranga #Uruaçu' }
+  ],
+  wpp: [
+    { titulo:'DISPARO — 20/jul', texto:'💚 Feliz Dia do Amigo!\n\nAquela pessoa que você deixou sem ver por tempo demais merece uma reunião. 🥂\n\nVem buscar o petisco e a bebida aqui no Super Maná — amizade boa tem ingrediente honesto. 🌿' }
+  ],
+  deco: [
+    { titulo:'Decoração leve', items:['Hortifruti em destaque na entrada com frutas de época','Placa simples: "Hoje é Dia do Amigo — celebra com ingredientes honestos"'] }
+  ],
+  ofertas: [
+    ['Açougue','Espetinhos e asa de frango: petiscos de reunião em oferta do dia'],
+    ['Hortifruti','Frutas de época para mesa de aperitivo: uva, morango, melão'],
+    ['Artesanal','Salgados artesanais do [parceiro] — "feitos hoje pra sua reunião"'],
+    ['Mercearia','Queijos e frios para tábua + biscoito salgado em oferta conjunta'],
+    ['Bebidas','Espumante + suco + vinho: combo para brinde de reencontro']
+  ],
+  identidade:'O Dia do Amigo reforça o pilar comunitário do Maná: a marca que cuida das relações humanas, não apenas das compras. Uma campanha simples que, bem executada, gera engajamento orgânico real — as pessoas marcam os amigos nos comentários e o alcance multiplica sem custo.'
+},
+
+'avos': {
+  month: 'julho',
+  date: '26 de Julho de 2026',
+  name: 'O Sabor que a Gente Nunca Esquece',
+  slogan: 'A comida da vovó tem ingrediente fresquinho e receita de carinho. Assim como aqui.',
+  ideia: 'O Dia dos Avós ativa a memória afetiva mais poderosa que existe: a comida de casa. A campanha conecta o frescor dos ingredientes com a memória gustativa da infância, reforçando que o Super Maná é o lugar onde os ingredientes têm a mesma qualidade de quando as coisas eram feitas com calma e carinho. Tom emocional máximo, com baixo investimento e alto impacto.',
+  meta: [['Período','23 a 26/jul'],['Pico','26/jul (domingo)'],['Tom','Emocional, nostálgico']],
+  periodo: [
+    'Início: 23/jul (quinta) — post de inspiração nostálgico no feed',
+    'Aquecimento: 25/jul (sábado) — disparo de WhatsApp',
+    'Pico: 26/jul (domingo) — post de homenagem + stories do dia'
+  ],
+  instagram: [
+    { tipo:'FEED — Homenagem emocional', visual:'Foto de mesa de almoço completa com produtos frescos do Maná. Tom nostálgico, quente, memória afetiva.', legenda:'Tem uma receita da sua avó que você nunca mais conseguiu replicar igual.\n\nA gente acredita que o segredo está no ingrediente fresco, colhido com cuidado. 🌿\n\nFeliz Dia dos Avós. Que receita você faria pra homenagear o seu?', hashtags:'#DiaDoAvos #SuperManá #ReceitaDaVovó #Itapuranga #Uruaçu' }
+  ],
+  wpp: [
+    { titulo:'DISPARO — 25/jul (véspera)', texto:'💚 Amanhã é Dia dos Avós!\n\nQue tal preparar aquela receita especial que eles sempre fizeram?\n\nTemos tudo fresquinho aqui — hortifruti, carnes e os melhores ingredientes pra uma refeição de domingo especial. 🌿\n\nSuper Maná te espera!' }
+  ],
+  deco: [
+    { titulo:'Entrada e exposição', items:['Hortifruti em destaque com composição de "ingredientes clássicos da cozinha da vovó"','Placa: "O segredo da receita da avó é o ingrediente fresco"','Exposição de produtos gourmet/premium como sugestão de presente'] }
+  ],
+  ofertas: [
+    ['Açougue','Frango inteiro e costela suína: clássicos da cozinha da vovó em oferta especial'],
+    ['Hortifruti','Mandioca, quiabo, jiló, chuchu: legumes clássicos da cozinha goiana em destaque'],
+    ['Artesanal','Bolo de mel e bolo de fubá artesanal do [parceiro] — "igual ao que a vovó fazia"'],
+    ['Mercearia','Café especial + biscoito de polvilho: o lanche da vovó em oferta conjunta'],
+    ['Bebidas','Suco de frutas naturais + café coado: bebidas do almoço de domingo especial']
+  ],
+  identidade:'O Dia dos Avós é a campanha mais emocional do trimestre. "A comida da vovó tem ingrediente fresquinho" conecta a memória afetiva com o diferencial real do Maná. Reforça que o Super Maná é o lugar onde o tempo foi honesto com a qualidade — e onde o frescor é uma forma de preservar o que importa.'
+},
+
+'manaday-julho': {
+  month: 'julho',
+  date: 'Última semana de Julho de 2026',
+  name: 'Maná Day — Voltamos ao Verde',
+  slogan: 'A Copa acabou. O verde continua. Aqui é verde todos os dias.',
+  ideia: 'O Maná Day de julho é o encerramento simbólico do trimestre mais agitado do ano. Após um mês de Copa, o evento celebra o retorno ao essencial da marca: frescor, hortifruti, cuidado com a família. Uma campanha que fecha o ciclo com identidade — sem Copa, sem eventos externos, apenas o verde de sempre. O parceiro artesanal volta como protagonista, reafirmando o ecossistema local.',
+  meta: [['Pré-evento','2 dias antes'],['Pico','Sábado da última semana'],['Temática','Retorno ao verde, pós-Copa'],['App VIP','1h antes']],
+  periodo: [
+    'Pré-aquecimento: 2 dias antes com conceito "voltamos ao verde"',
+    'Disparo WhatsApp: véspera + manhã do evento',
+    'Pico: sábado da última semana de julho',
+    'Encerramento do trimestre — relatório de métricas da campanha completa'
+  ],
+  instagram: [
+    { tipo:'FEED — Volta ao verde (véspera)', visual:'Arte Maná Day com hortifruti impecável como protagonista. Verde escuro + âmbar. Sem elementos Copa — retorno à identidade central da marca.', legenda:'A Copa foi incrível. Mas aqui é verde todos os dias. 💚\n\nManá Day de Julho chega amanhã com o melhor do nosso verde:\nhortifruti fresquinho, parceiros artesanais e as melhores ofertas do mês.\n\nApp users: acesso 1h antes. Te vejo amanhã!', hashtags:'#ManáDay #SuperManá #AquiÉVerdeTodosDias #Itapuranga #Uruaçu' }
+  ],
+  wpp: [
+    { titulo:'DISPARO 1 — 2 dias antes', texto:'💚 Copa acabou. Maná Day continua!\n\nE nesse mês a gente volta com tudo pro nosso verde de sempre.\nHortifruti fresquinho, açougue completo e as melhores ofertas do mês.\n\nUsuários do app: acesso 1h antes. Já baixou? 🌿' },
+    { titulo:'DISPARO 2 — Dia do evento', texto:'🌿 MANÁ DAY DE JULHO!\n\nAbre às [horário] — app users primeiro.\nSemana começa bem com as melhores ofertas do mês.\n\nAqui é verde todos os dias — e hoje mais do que nunca. Vem!' }
+  ],
+  deco: [
+    { titulo:'Decoração retorno ao verde', items:['Voltar ao verde clássico — sem elementos Copa. Hortifruti impecável na entrada como protagonista absoluto','Destaque especial para os parceiros artesanais: protagonistas do Maná Day de julho','Placa: "A Copa foi incrível. Mas aqui é verde todos os dias."'] }
+  ],
+  ofertas: [
+    ['Açougue','Frango e carne moída: ofertas âncora para a semana — foco no cotidiano da família'],
+    ['Hortifruti','Sacola verde quinzenal: 8 itens selecionados por preço fixo — retomada do consumo fresco pós-Copa'],
+    ['Artesanal','Pão caseiro e bolo artesanal: parceiros locais em destaque como protagonistas do evento'],
+    ['Mercearia','Leve 3 pague 2 em produtos de limpeza + arroz e feijão da semana'],
+    ['Bebidas','Suco natural + água de coco: bebidas saudáveis em destaque como "recomeço pós-Copa"']
+  ],
+  identidade:'O Maná Day Pós-Copa fecha o trimestre com a afirmação mais poderosa da marca: "Aqui é verde todos os dias." Após um mês de Copa e agitação, o retorno ao essencial reforça que a identidade do Maná é maior que qualquer evento sazonal. O hortifruti como protagonista e os parceiros artesanais no centro da narrativa encerram o ciclo com autenticidade.'
+}
+
+};
+
+let currentMonth = 'maio';
+let currentCampaign = null;
+
+function setMonth(month) {
+  currentMonth = month;
+  currentCampaign = null;
+  document.querySelectorAll('.month-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['maio','junho','julho'][i] === month);
+  });
+  document.querySelectorAll('.month-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section-' + month).classList.add('active');
+  document.querySelectorAll('.campaign-detail').forEach(d => { d.classList.remove('visible'); d.innerHTML = ''; });
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active-date'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openCampaign(id) {
+  const c = CAMPAIGNS[id];
+  if (!c) return;
+
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active-date'));
+  event.currentTarget.classList.add('active-date');
+
+  const detailEl = document.getElementById('detail-' + c.month);
+  document.querySelectorAll('.campaign-detail').forEach(d => { d.classList.remove('visible'); d.innerHTML = ''; });
+
+  const metaHtml = c.meta.map(([l,v]) => `<div class="cd-meta-item"><span class="mi-label">${l}</span><span class="mi-val">${v}</span></div>`).join('');
+
+  const periodoHtml = c.periodo.map(item => `<li>${item}</li>`).join('');
+
+  const igHtml = c.instagram.map(p => `
+    <div class="ig-post">
+      <div class="ig-tipo">${p.tipo}</div>
+      <div class="ig-visual-label">Visual sugerido</div>
+      <div class="ig-visual-text">${p.visual}</div>
+      <div class="ig-legenda-label">Legenda</div>
+      <div class="ig-legenda-text">${p.legenda}</div>
+      ${p.hashtags ? `<div class="ig-hashtags">${p.hashtags}</div>` : ''}
+    </div>
+  `).join('');
+
+  const wppHtml = c.wpp.map(m => `
+    <div class="wpp-msg">
+      <div class="wpp-title">${m.titulo}</div>
+      <div class="wpp-text">${m.texto}</div>
+    </div>
+  `).join('');
+
+  const decoHtml = c.deco.map(d => `
+    <div class="deco-section">
+      <div class="deco-section-title">${d.titulo}</div>
+      <ul class="deco-list">${d.items.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>
+  `).join('');
+
+  const ofertasHtml = c.ofertas.map(([s,o]) => `
+    <tr><td class="setor-cell">${s}</td><td>${o}</td></tr>
+  `).join('');
+
+  detailEl.innerHTML = `
+    <button class="back-btn" onclick="closeCampaign()">← Voltar às datas</button>
+    <div class="cd-hero">
+      <div class="cd-hero-label">${c.date}</div>
+      <div class="cd-hero-campaign">${c.name}</div>
+      <div class="cd-hero-slogan">${c.slogan}</div>
+      <div class="cd-meta">${metaHtml}</div>
+    </div>
+
+    <div class="idea-central">
+      <span class="idea-icon">💡</span>
+      <div>
+        <div class="idea-label">Ideia Central da Campanha</div>
+        <div class="idea-text">${c.ideia}</div>
+      </div>
+    </div>
+
+    <div class="sections-grid">
+      <div class="section-card">
+        <div class="sc-head"><span class="sc-icon">📅</span><span class="sc-title">Período da Ação</span></div>
+        <div class="sc-body"><ul class="periodo-list">${periodoHtml}</ul></div>
+      </div>
+      <div class="section-card">
+        <div class="sc-head dark"><span class="sc-icon">🔗</span><span class="sc-title">Conexão com a Identidade</span></div>
+        <div class="sc-body"><div class="id-box">${c.identidade}</div></div>
+      </div>
+    </div>
+
+    <div class="sections-grid">
+      <div class="section-card full">
+        <div class="sc-head"><span class="sc-icon">📸</span><span class="sc-title">Instagram — Publicações</span></div>
+        <div class="sc-body">${igHtml}</div>
+      </div>
+    </div>
+
+    <div class="sections-grid">
+      <div class="section-card full">
+        <div class="sc-head amber"><span class="sc-icon">💬</span><span class="sc-title">WhatsApp — Mensagens Prontas</span></div>
+        <div class="sc-body">${wppHtml}</div>
+      </div>
+    </div>
+
+    <div class="sections-grid">
+      <div class="section-card">
+        <div class="sc-head dourado"><span class="sc-icon">🏪</span><span class="sc-title">Decoração na Loja</span></div>
+        <div class="sc-body">${decoHtml}</div>
+      </div>
+      <div class="section-card">
+        <div class="sc-head"><span class="sc-icon">🛒</span><span class="sc-title">Ofertas por Setor</span></div>
+        <div class="sc-body">
+          <table class="ofertas-table">
+            <thead><tr><th style="width:30%">Setor</th><th>Oferta sugerida</th></tr></thead>
+            <tbody>${ofertasHtml}</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+
+  detailEl.classList.add('visible');
+  setTimeout(() => {
+    detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
+}
+
+function closeCampaign() {
+  document.querySelectorAll('.campaign-detail').forEach(d => { d.classList.remove('visible'); d.innerHTML = ''; });
+  document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active-date'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
